@@ -137,8 +137,8 @@ public class DatePickerDialog extends DialogFragment implements
     private boolean mThemeDarkChanged = false;
     private int mAccentColor = -1;
     private int mBackgroundDrawable = -1;
-    private int mSelectedDayColorgradientStart = -1;
-    private int mSelectedDayColorgradientEnd = -1;
+    private int mSelectedDayColorGradientStart = -1;
+    private int mSelectedDayColorGradientEnd = -1;
     private int mSelectedYearCircleColor = -1;
     private boolean mVibrate = true;
     private boolean mDismissOnPause = false;
@@ -693,8 +693,8 @@ public class DatePickerDialog extends DialogFragment implements
     }
 
     public void setSelectedDayColorGradientColors(int colorStart, int colorEnd) {
-        mSelectedDayColorgradientStart = colorStart;
-        mSelectedDayColorgradientEnd = colorEnd;
+        mSelectedDayColorGradientStart = colorStart;
+        mSelectedDayColorGradientEnd = colorEnd;
     }
 
     public void setSelectedYearCircleColor(int color) {
@@ -767,7 +767,7 @@ public class DatePickerDialog extends DialogFragment implements
 
     @Override
     public int getSelectedDayColorGradientStart() {
-        return mSelectedDayColorgradientStart;
+        return mSelectedDayColorGradientStart;
     }
 
     @Override
@@ -777,7 +777,7 @@ public class DatePickerDialog extends DialogFragment implements
 
     @Override
     public int getSelectedDayColorGradientEnd() {
-        return mSelectedDayColorgradientEnd;
+        return mSelectedDayColorGradientEnd;
     }
 
     /**

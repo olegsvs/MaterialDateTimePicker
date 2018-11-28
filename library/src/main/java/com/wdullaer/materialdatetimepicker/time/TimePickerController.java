@@ -21,6 +21,12 @@ interface TimePickerController {
      */
     int getAccentColor();
 
+    int getBackgroundDrawable();
+
+    int getmSelectionGradientStart();
+
+    int getmSelectionGradientEnd();
+
     /**
      * @return Version - The current version to render
      */
