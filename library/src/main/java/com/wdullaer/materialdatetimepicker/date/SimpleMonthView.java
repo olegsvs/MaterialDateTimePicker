@@ -18,6 +18,8 @@ package com.wdullaer.materialdatetimepicker.date;
 
 import android.content.Context;
 import android.graphics.Canvas;
+import android.graphics.LinearGradient;
+import android.graphics.Shader;
 import android.graphics.Typeface;
 import android.util.AttributeSet;
 
@@ -31,6 +33,10 @@ public class SimpleMonthView extends MonthView {
     public void drawMonthDay(Canvas canvas, int year, int month, int day,
                              int x, int y, int startX, int stopX, int startY, int stopY) {
         if (mSelectedDay == day) {
+            if (mController.getSelectedDayColorGradientStart() != -1)
+                mSelectedCirclePaint.setShader(new LinearGradient(startX, startY, stopX
+                        , stopY, mController.getSelectedDayColorGradientStart(),
+                        mController.getSelectedDayColorGradientEnd(), Shader.TileMode.CLAMP));
             canvas.drawCircle(x, y - (MINI_DAY_NUMBER_TEXT_SIZE / 3), DAY_SELECTED_CIRCLE_SIZE,
                     mSelectedCirclePaint);
         }

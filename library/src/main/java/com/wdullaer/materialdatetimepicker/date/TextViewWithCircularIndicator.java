@@ -21,12 +21,15 @@ import android.content.Context;
 import android.content.res.ColorStateList;
 import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.LinearGradient;
 import android.graphics.Paint;
 import android.graphics.Paint.Align;
 import android.graphics.Paint.Style;
+import android.graphics.Shader;
 import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
 import android.util.AttributeSet;
+import android.util.Log;
 
 import com.wdullaer.materialdatetimepicker.R;
 
@@ -69,8 +72,9 @@ public class TextViewWithCircularIndicator extends android.support.v7.widget.App
 
     /**
      * Programmatically set the color state list (see mdtp_date_picker_year_selector)
+     *
      * @param accentColor pressed state text color
-     * @param darkMode current theme mode
+     * @param darkMode    current theme mode
      * @return ColorStateList with pressed state
      */
     private ColorStateList createTextColor(int accentColor, boolean darkMode) {

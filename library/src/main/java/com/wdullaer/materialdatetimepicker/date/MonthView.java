@@ -18,11 +18,15 @@ package com.wdullaer.materialdatetimepicker.date;
 
 import android.content.Context;
 import android.content.res.Resources;
+import android.graphics.BitmapShader;
 import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.LinearGradient;
 import android.graphics.Paint;
 import android.graphics.Paint.Align;
 import android.graphics.Paint.Style;
 import android.graphics.Rect;
+import android.graphics.Shader;
 import android.graphics.Typeface;
 import android.os.Build;
 import android.os.Bundle;
@@ -123,6 +127,7 @@ public abstract class MonthView extends View {
     protected int mSelectedDayTextColor;
     protected int mMonthDayTextColor;
     protected int mTodayNumberColor;
+    protected int mTodayNumberBackgroundDrawable;
     protected int mHighlightedDayTextColor;
     protected int mDisabledDayTextColor;
     protected int mMonthTitleColor;
@@ -158,6 +163,7 @@ public abstract class MonthView extends View {
         }
         mSelectedDayTextColor = ContextCompat.getColor(context, R.color.mdtp_white);
         mTodayNumberColor = mController.getAccentColor();
+        mTodayNumberBackgroundDrawable = mController.getBackgroundDrawable();
         mMonthTitleColor = ContextCompat.getColor(context, R.color.mdtp_white);
 
         mStringBuilder = new StringBuilder(50);
@@ -251,7 +257,12 @@ public abstract class MonthView extends View {
         mSelectedCirclePaint = new Paint();
         mSelectedCirclePaint.setFakeBoldText(true);
         mSelectedCirclePaint.setAntiAlias(true);
-        mSelectedCirclePaint.setColor(mTodayNumberColor);
+        if (mTodayNumberBackgroundDrawable == -1)
+            mSelectedCirclePaint.setColor(mTodayNumberColor);
+        else {
+            mSelectedCirclePaint.setColor(mTodayNumberColor);
+
+        }
         mSelectedCirclePaint.setTextAlign(Align.CENTER);
         mSelectedCirclePaint.setStyle(Style.FILL);
         mSelectedCirclePaint.setAlpha(SELECTED_CIRCLE_ALPHA);
@@ -406,7 +417,8 @@ public abstract class MonthView extends View {
         Locale locale = mController.getLocale();
         String pattern = "MMMM yyyy";
 
-        if (Build.VERSION.SDK_INT < 18) pattern = getContext().getResources().getString(R.string.mdtp_date_v1_monthyear);
+        if (Build.VERSION.SDK_INT < 18)
+            pattern = getContext().getResources().getString(R.string.mdtp_date_v1_monthyear);
         else pattern = DateFormat.getBestDateTimePattern(locale, pattern);
 
         SimpleDateFormat formatter = new SimpleDateFormat(pattern, locale);
@@ -553,9 +565,9 @@ public abstract class MonthView extends View {
     }
 
     /**
-     * @param year as an int
+     * @param year  as an int
      * @param month as an int
-     * @param day as an int
+     * @param day   as an int
      * @return true if the given date should be highlighted
      */
     protected boolean isHighlighted(int year, int month, int day) {

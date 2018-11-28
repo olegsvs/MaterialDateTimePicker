@@ -51,8 +51,8 @@ public class YearPickerView extends ListView implements OnItemClickListener, OnD
         setLayoutParams(frame);
         Resources res = context.getResources();
         mViewSize = mController.getVersion() == DatePickerDialog.Version.VERSION_1
-            ? res.getDimensionPixelOffset(R.dimen.mdtp_date_picker_view_animator_height)
-            : res.getDimensionPixelOffset(R.dimen.mdtp_date_picker_view_animator_height_v2);
+                ? res.getDimensionPixelOffset(R.dimen.mdtp_date_picker_view_animator_height)
+                : res.getDimensionPixelOffset(R.dimen.mdtp_date_picker_view_animator_height_v2);
         mChildSize = res.getDimensionPixelOffset(R.dimen.mdtp_year_label_height);
         setVerticalFadingEdgeEnabled(true);
         setFadingEdgeLength(mChildSize / 3);
@@ -125,12 +125,15 @@ public class YearPickerView extends ListView implements OnItemClickListener, OnD
                 v = (TextViewWithCircularIndicator) convertView;
             } else {
                 v = (TextViewWithCircularIndicator) LayoutInflater.from(parent.getContext())
-                  .inflate(R.layout.mdtp_year_label_text_view, parent, false);
-                v.setAccentColor(mController.getAccentColor(), mController.isThemeDark());
+                        .inflate(R.layout.mdtp_year_label_text_view, parent, false);
+                if (mController.getSelectedYearCircleColor() != -1)
+                    v.setAccentColor(mController.getSelectedYearCircleColor(), mController.isThemeDark());
+                else
+                    v.setAccentColor(mController.getAccentColor(), mController.isThemeDark());
             }
             int year = mMinYear + position;
             boolean selected = mController.getSelectedDay().year == year;
-            v.setText(String.format(mController.getLocale(),"%d", year));
+            v.setText(String.format(mController.getLocale(), "%d", year));
             v.drawIndicator(selected);
             v.requestLayout();
             if (selected) {
